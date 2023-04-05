@@ -1,4 +1,4 @@
-package com.rockethelp;
+package com.melk_de_sousa.rocket_help;
 
 import android.app.Application;
 import android.content.res.Configuration;

@@ -5,6 +5,18 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c8ebbe10-201a-4bf8-8417-592469e0d576"
+      }
+    },
+    "owner": "melk_de_sousa",
+    "android": {
+      "package": "com.melk_de_sousa.rocket_help"
+    },
+    "ios": {
+      "bundleIdentifier": "rocket.help"
+    }
   }
 }
