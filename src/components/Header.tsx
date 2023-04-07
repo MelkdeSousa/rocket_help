@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { StyledProps } from 'nativewind'
 import { CaretLeft } from 'phosphor-react-native'
 import React from 'react'
@@ -9,16 +10,23 @@ export type HeaderProps = {
 } & StyledProps<ViewProps>
 
 export const Header = ({ title, ...props }: HeaderProps) => {
+  const navigation = useNavigation()
+
+  const handleGoBack = () => navigation.goBack()
+
   return (
     <View
-      className="w-full justify-between items-center bg-gray-600 pb-6 pt-12 flex-row"
+      className="w-full px-6 justify-between items-center bg-gray-600 pb-6 pt-12 flex-row"
       {...props}
     >
-      <Pressable>
+      <Pressable
+        className="p-2  transition-colors duration-300 ease-in active:bg-gray-500  rounded-md"
+        onPress={handleGoBack}
+      >
         <CaretLeft size={sizes[6]} color={colors.gray[200]} />
       </Pressable>
 
-      <Text className="font-roboto font-bold text-gray-100 text-center text-lg flex flex-1 -ml-5">
+      <Text className="font-roboto font-bold text-gray-100 text-center text-lg flex flex-1 -ml-7">
         {title}
       </Text>
     </View>

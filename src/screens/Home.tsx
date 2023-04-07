@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Pressable, Text, View, colors, sizes } from '../styles'
 
+import { useNavigation } from '@react-navigation/native'
 import { ChatTeardropText, SignOut } from 'phosphor-react-native'
 import { FlatList } from 'react-native'
 import Logo from '../assets/svg/log_secondary.svg'
@@ -9,20 +10,27 @@ import { Filter } from '../components/Filter'
 import { Order } from '../components/Order'
 import { Space } from '../components/Space'
 import { Order as OrderModel } from '../models/Order'
+import { AppNavigationProp } from '../routes/app.routes'
 
 export const Home = () => {
+  const navigation = useNavigation<AppNavigationProp>()
   const [selectedStatus, setSelectedStatus] = useState<'open' | 'closed'>(
     'open',
   )
 
-  const [orders, setOrders] = useState<OrderModel[]>([
-    // {
-    //   id: '1',
-    //   status: 'open',
-    //   patrimony: '1234',
-    //   when: '2022-05-02T12:00:00.000Z',
-    // },
+  const [orders] = useState<OrderModel[]>([
+    {
+      id: '1',
+      status: 'open',
+      when: '2022-05-02T12:00:00.000Z',
+      patrimony: '1234',
+    },
   ])
+
+  const handleNewOrder = () => navigation.navigate('register')
+
+  const handleOpenDetails = (orderId: string) => () =>
+    navigation.navigate('details', { orderId })
 
   return (
     <View className="flex flex-1 pb-6 bg-gray-700">
@@ -37,10 +45,10 @@ export const Home = () => {
       <View className="flex-1 flex px-6">
         <View className="w-full mt-8 mb-4 flex-row justify-between items-center">
           <Text className="font-roboto text-gray-100 text-xl font-medium">
-            Meus chamados
+            Solicitações
           </Text>
           <Text className="font-roboto text-gray-200 text-base font-normal">
-            3
+            {orders.length}
           </Text>
         </View>
 
@@ -64,7 +72,9 @@ export const Home = () => {
           data={orders}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Order data={item} />}
+          renderItem={({ item }) => (
+            <Order data={item} onPress={handleOpenDetails(item.id)} />
+          )}
           overScrollMode="never"
           contentContainerStyle={{
             paddingBottom: 100,
@@ -82,7 +92,7 @@ export const Home = () => {
           )}
         />
 
-        <ButtonFilled>
+        <ButtonFilled onPress={handleNewOrder}>
           <Text className="font-roboto font-bold text-lg text-white">
             Nova solicitação
           </Text>
