@@ -13,11 +13,18 @@ import { KeyboardAvoidingView, Text, View, colors, sizes } from '../styles'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const signInSchema = z.object({
-  username: z.string().min(5, {
-    message: 'O nome de usuário precisa ter no mínimo 5 caracteres',
-  }),
+  username: z
+    .string({
+      required_error: 'O nome de usuário é obrigatório',
+    })
+    .min(5, {
+      message: 'O nome de usuário precisa ter no mínimo 5 caracteres',
+    })
+    .toLowerCase(),
   password: z
-    .string()
+    .string({
+      required_error: 'A senha é obrigatória',
+    })
     .min(8, { message: 'A senha precisa ter no mínimo 8 caracteres' }),
 })
 
@@ -51,7 +58,10 @@ export const SignIn = () => {
         <Controller
           control={control}
           name="username"
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
             <Input
               placeholder="Nome de usuário"
               textContentType="nickname"
@@ -61,6 +71,8 @@ export const SignIn = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              error={!!error}
+              errorMessage={error?.message}
             />
           )}
         />
@@ -70,7 +82,10 @@ export const SignIn = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
             <Input
               textContentType="password"
               enablesReturnKeyAutomatically
@@ -81,6 +96,8 @@ export const SignIn = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              error={!!error}
+              errorMessage={error?.message}
             />
           )}
         />
