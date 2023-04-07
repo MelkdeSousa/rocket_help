@@ -1,5 +1,6 @@
 import React from 'react'
 
+import clsx from 'clsx'
 import { styled } from 'nativewind'
 import { TextInputProps, ViewProps } from 'react-native'
 import { Text, TextInput, View } from '../styles'
@@ -25,14 +26,21 @@ export const Input = styled(
     return (
       <View className="w-full flex">
         <View
-          className="bg-gray-700  flex-row border-0 rounded-md items-start p-4 focus:border focus:border-product-500 focus:border-spacing-1"
+          className={clsx(
+            'bg-gray-700  flex-row border rounded-md items-start p-4   ',
+            {
+              'border-red-400': error,
+              'border-gray-700 focus:border-product-500 focus:border-spacing-1':
+                !error,
+            },
+          )}
           style={wrapperStyle}
         >
           {leftElement}
 
           <TextInput
             className="bg-gray-700 text-base px-4 font-roboto font-medium text-white"
-            placeholderTextColor={colors.gray[300]}
+            placeholderTextColor={error ? colors.red[400] : colors.gray[300]}
             cursorColor={colors.gray[300]}
             {...props}
           />

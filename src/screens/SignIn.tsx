@@ -33,7 +33,7 @@ export const signInSchema = z
   })
   .required()
 
-export type SignInFormData = z.infer<typeof signInSchema>
+export type SignInInput = z.infer<typeof signInSchema>
 
 export const SignIn = () => {
   const { setUser } = useUserStore()
@@ -42,11 +42,11 @@ export const SignIn = () => {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<SignInFormData>({
+  } = useForm<SignInInput>({
     resolver: zodResolver(signInSchema),
   })
 
-  const onSubmit = async ({ password, email }: SignInFormData) => {
+  const onSubmit = async ({ password, email }: SignInInput) => {
     try {
       const cognitoUser = await signIn(email, password)
 
