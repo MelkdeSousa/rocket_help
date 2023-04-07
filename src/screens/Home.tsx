@@ -11,8 +11,10 @@ import { Order } from '../components/Order'
 import { Space } from '../components/Space'
 import { Order as OrderModel } from '../models/Order'
 import { AppNavigationProp } from '../routes/app.routes'
+import useUserStore from '../stores/user.store'
 
 export const Home = () => {
+  const { removeUser } = useUserStore()
   const navigation = useNavigation<AppNavigationProp>()
   const [selectedStatus, setSelectedStatus] = useState<'open' | 'closed'>(
     'open',
@@ -32,12 +34,17 @@ export const Home = () => {
   const handleOpenDetails = (orderId: string) => () =>
     navigation.navigate('details', { orderId })
 
+  const handleSignOut = () => removeUser()
+
   return (
     <View className="flex flex-1 pb-6 bg-gray-700">
       <View className="w-full flex-row justify-between items-center bg-gray-600 pt-12 pb-5 px-6">
         <Logo />
 
-        <Pressable className="p-2  transition-colors duration-300 ease-in active:bg-gray-500  rounded-md">
+        <Pressable
+          className="p-2  transition-colors duration-300 ease-in active:bg-gray-500  rounded-md"
+          onPress={handleSignOut}
+        >
           <SignOut size={sizes[6]} color={colors.gray[300]} />
         </Pressable>
       </View>

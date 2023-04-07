@@ -3,6 +3,7 @@ export type AmplifyDependentResourcesAttributes = {
     "rockethelpad1b1114": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
       "UserPoolArn": "string",

@@ -5,11 +5,10 @@ import {
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 
-import { Loading } from './components/Loading'
+import { Spinner } from './components/Spinner'
 import { Routes } from './routes'
-import { View } from './styles'
 
-export default function App() {
+const App = () => {
   const [fontsLoaded] = useFonts({
     Roboto,
   })
@@ -18,13 +17,9 @@ export default function App() {
     <>
       <StatusBar style="light" translucent animated />
 
-      {!fontsLoaded ? (
-        <View className="bg-gray-600 flex flex-1 justify-center items-center">
-          <Loading />
-        </View>
-      ) : (
-        <Routes />
-      )}
+      {!fontsLoaded ? <Spinner /> : <Routes />}
     </>
   )
 }
+
+export default App
