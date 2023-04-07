@@ -4,7 +4,5 @@ export const formatDateToWhenText = (value: number | string | Date): string => {
   const day = date.toLocaleDateString('pt-BR')
   const hour = date.toLocaleTimeString('pt-BR').slice(0, 5)
 
-  console.log(date)
-
   return `${day} às ${hour}`
 }
