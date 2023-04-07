@@ -1,5 +1,7 @@
 import { styled } from 'nativewind'
 import {
+  FlatList as RNFlatList,
+  Pressable as RNPressable,
   SafeAreaView as RNSafeAreaView,
   ScrollView as RNScrollView,
   Text as RNText,
@@ -16,3 +18,5 @@ export const TouchableOpacity = styled(RNTouchableOpacity)
 export const KeyboardAvoidingView = styled(KeyboardAwareScrollView)
 export const SafeAreaView = styled(RNSafeAreaView)
 export const ScrollView = styled(RNScrollView)
+export const Pressable = styled(RNPressable)
+export const FlatList = styled(RNFlatList)
