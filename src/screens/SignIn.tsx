@@ -21,6 +21,7 @@ export const signInSchema = z
       .string({
         required_error: 'O nome de usuário é obrigatório',
       })
+      .email({ message: 'E-mail inválido' })
       .min(5, {
         message: 'O nome de usuário precisa ter no mínimo 5 caracteres',
       })
@@ -41,9 +42,12 @@ export const SignIn = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isValid },
   } = useForm<SignInInput>({
     resolver: zodResolver(signInSchema),
+    reValidateMode: 'onBlur',
+    mode: 'onBlur',
+    criteriaMode: 'all',
   })
 
   const onSubmit = async ({ password, email }: SignInInput) => {
@@ -89,7 +93,10 @@ export const SignIn = () => {
               keyboardType="email-address"
               returnKeyType="next"
               leftElement={
-                <Envelope color={colors.gray[300]} size={sizes[7]} />
+                <Envelope
+                  color={error ? colors.red[400] : colors.gray[300]}
+                  size={sizes[7]}
+                />
               }
               onBlur={onBlur}
               onChangeText={onChange}
@@ -114,7 +121,12 @@ export const SignIn = () => {
               enablesReturnKeyAutomatically
               placeholder="Senha"
               returnKeyType="done"
-              leftElement={<Key color={colors.gray[300]} size={sizes[7]} />}
+              leftElement={
+                <Key
+                  color={error ? colors.red[400] : colors.gray[300]}
+                  size={sizes[7]}
+                />
+              }
               secureTextEntry
               onBlur={onBlur}
               onChangeText={onChange}
@@ -127,7 +139,11 @@ export const SignIn = () => {
 
         <Space className="h-4" />
 
-        <ButtonFilled loading={isSubmitting} onPress={handleSubmit(onSubmit)}>
+        <ButtonFilled
+          loading={isSubmitting}
+          onPress={handleSubmit(onSubmit)}
+          disabled={!isValid || isSubmitting}
+        >
           <Text className="font-roboto font-bold text-lg text-white">
             Entrar
           </Text>

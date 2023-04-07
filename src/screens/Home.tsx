@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pressable, Text, View, colors, sizes } from '../styles'
 
 import { useNavigation } from '@react-navigation/native'
+import { DataStore } from 'aws-amplify'
 import { ChatTeardropText, SignOut } from 'phosphor-react-native'
 import { FlatList } from 'react-native'
 import Logo from '../assets/svg/log_secondary.svg'
@@ -9,6 +10,8 @@ import { ButtonFilled } from '../components/ButtonFilled'
 import { Filter } from '../components/Filter'
 import { Order } from '../components/Order'
 import { Space } from '../components/Space'
+import { formatDateToWhenText } from '../lib/formatDateToWhenText'
+import { OrderSchema } from '../models'
 import { Order as OrderModel } from '../models/Order'
 import { AppNavigationProp } from '../routes/app.routes'
 import useUserStore from '../stores/user.store'
@@ -20,14 +23,7 @@ export const Home = () => {
     'open',
   )
 
-  const [orders] = useState<OrderModel[]>([
-    {
-      id: '1',
-      status: 'open',
-      when: '2022-05-02T12:00:00.000Z',
-      patrimony: '1234',
-    },
-  ])
+  const [orders, setOrders] = useState<OrderModel[]>([])
 
   const handleNewOrder = () => navigation.navigate('register')
 
@@ -35,6 +31,23 @@ export const Home = () => {
     navigation.navigate('details', { orderId })
 
   const handleSignOut = () => removeUser()
+
+  useEffect(() => {
+    const subscribe = DataStore.observeQuery(OrderSchema, (order) =>
+      order.and((o) => [o.status.eq(selectedStatus)]),
+    ).subscribe(({ items }) =>
+      setOrders(
+        items.map((order) => ({
+          id: order.id,
+          patrimony: order.patrimony,
+          status: order.status as OrderModel['status'],
+          when: formatDateToWhenText(order.createdAt),
+        })),
+      ),
+    )
+
+    return () => subscribe.unsubscribe()
+  }, [selectedStatus])
 
   return (
     <View className="flex flex-1 pb-6 bg-gray-700">

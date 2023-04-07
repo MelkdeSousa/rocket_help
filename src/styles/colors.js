@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  ...colors,
+  red: colors.red,
   product: {
     300: '#04d361',
     500: '#00b37e',

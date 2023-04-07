@@ -9,7 +9,6 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 type EagerOrderSchema = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<OrderSchema, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly status?: string | null;
@@ -22,7 +21,6 @@ type EagerOrderSchema = {
 type LazyOrderSchema = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<OrderSchema, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly status?: string | null;

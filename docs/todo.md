@@ -1,3 +1,4 @@
 # Todo
 
-- confirm sign-in
+- *confirm sign-in*
+- *toast* ao invés de *Alert*

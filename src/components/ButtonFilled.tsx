@@ -1,6 +1,7 @@
+import clsx from 'clsx'
 import React from 'react'
 import { TouchableOpacityProps } from 'react-native'
-import { TouchableOpacity } from '../styles'
+import { Pressable } from '../styles'
 import { Loading } from './Loading'
 
 export type ButtonFilledProps = TouchableOpacityProps & {
@@ -11,20 +12,20 @@ export const ButtonFilled = ({
   children,
   loading = false,
   onPress,
+  disabled = false,
   ...props
 }: ButtonFilledProps) => {
   return (
-    <TouchableOpacity
-      className="w-full bg-product-700 items-center p-4 rounded-md"
-      disabled={loading}
-      onPress={loading ? undefined : onPress}
-      style={{
-        opacity: loading ? 0.5 : 1,
-      }}
+    <Pressable
+      className={clsx('w-full bg-product-700 items-center p-4 rounded-md', {
+        'opacity-60 transition-opacity ease-in duration-200':
+          loading || disabled,
+      })}
+      onPress={loading || disabled ? undefined : onPress}
       {...props}
     >
       {loading && <Loading />}
       {!loading && children}
-    </TouchableOpacity>
+    </Pressable>
   )
 }

@@ -39,7 +39,12 @@ export const Input = styled(
           {leftElement}
 
           <TextInput
-            className="bg-gray-700 text-base px-4 font-roboto font-medium text-white"
+            className={clsx(
+              'bg-gray-700 text-base px-4 font-roboto font-medium text-white',
+              {
+                'text-red-400': error,
+              },
+            )}
             placeholderTextColor={error ? colors.red[400] : colors.gray[300]}
             cursorColor={colors.gray[300]}
             {...props}

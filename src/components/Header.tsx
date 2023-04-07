@@ -26,7 +26,7 @@ export const Header = ({ title, ...props }: HeaderProps) => {
         <CaretLeft size={sizes[6]} color={colors.gray[200]} />
       </Pressable>
 
-      <Text className="font-roboto font-bold text-gray-100 text-center text-lg flex flex-1 -ml-7">
+      <Text className="font-roboto font-bold text-gray-100 text-center text-lg flex flex-1">
         {title}
       </Text>
     </View>
