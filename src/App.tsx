@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 
 import { Loading } from './components/Loading'
-import { SignIn } from './screens/SignIn'
+import { Home } from './screens/Home'
 import { View } from './styles'
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
           <Loading />
         </View>
       ) : (
-        <SignIn />
+        <Home />
       )}
     </>
   )

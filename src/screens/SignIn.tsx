@@ -12,9 +12,9 @@ export const SignIn = () => {
   return (
     <KeyboardAvoidingView
       overScrollMode="never"
-      className="bg-gray-600  flex-1 flex "
+      className="bg-gray-600 flex-1 px-6 pt-24 flex "
     >
-      <View className="flex flex-1 px-8 pt-24 w-full items-center">
+      <View className="flex flex-1  w-full items-center">
         <Logo />
 
         <Text className=" font-roboto font-bold text-xl text-white mt-20 mb-6">
@@ -27,7 +27,7 @@ export const SignIn = () => {
           keyboardType="email-address"
           enablesReturnKeyAutomatically
           returnKeyType="next"
-          leftElement={<Envelope color={colors.gray[300]} size={sizes[8]} />}
+          leftElement={<Envelope color={colors.gray[300]} size={sizes[7]} />}
         />
 
         <Space className="h-4" />
@@ -37,7 +37,7 @@ export const SignIn = () => {
           enablesReturnKeyAutomatically
           placeholder="Senha"
           returnKeyType="done"
-          leftElement={<Key color={colors.gray[300]} size={sizes[8]} />}
+          leftElement={<Key color={colors.gray[300]} size={sizes[7]} />}
           secureTextEntry
         />
 
