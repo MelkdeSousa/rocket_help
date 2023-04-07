@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-rockethelp-dev-91338-authRole",
+      "UnauthRoleArn": "arn:aws:iam::622379724040:role/amplify-rockethelp-dev-91338-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::622379724040:role/amplify-rockethelp-dev-91338-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-rockethelp-dev-91338-deployment",
+      "UnauthRoleName": "amplify-rockethelp-dev-91338-unauthRole",
+      "StackName": "amplify-rockethelp-dev-91338",
+      "StackId": "arn:aws:cloudformation:us-east-1:622379724040:stack/amplify-rockethelp-dev-91338/a2b29f90-d53d-11ed-b974-124e8751457b",
+      "AmplifyAppId": "dcwz3fyd78qi1"
+    },
+    "categories": {
+      "auth": {
+        "rockethelpad1b1114": {}
+      }
+    }
+  }
+}
