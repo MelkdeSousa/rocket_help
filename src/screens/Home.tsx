@@ -8,6 +8,7 @@ import { FlatList } from 'react-native'
 import Logo from '../assets/svg/log_secondary.svg'
 import { ButtonFilled } from '../components/ButtonFilled'
 import { Filter } from '../components/Filter'
+import { Loading } from '../components/Loading'
 import { Order } from '../components/Order'
 import { Space } from '../components/Space'
 import { formatDateToWhenText } from '../lib/formatDateToWhenText'
@@ -19,11 +20,13 @@ import useUserStore from '../stores/user.store'
 export const Home = () => {
   const { removeUser } = useUserStore()
   const navigation = useNavigation<AppNavigationProp>()
+
   const [selectedStatus, setSelectedStatus] = useState<'open' | 'closed'>(
     'open',
   )
 
   const [orders, setOrders] = useState<OrderModel[]>([])
+  const [loadingOrders, setLoadingOrders] = useState(false)
 
   const handleNewOrder = () => navigation.navigate('register')
 
@@ -33,9 +36,11 @@ export const Home = () => {
   const handleSignOut = () => removeUser()
 
   useEffect(() => {
+    setLoadingOrders(true)
+
     const subscribe = DataStore.observeQuery(OrderSchema, (order) =>
       order.and((o) => [o.status.eq(selectedStatus)]),
-    ).subscribe(({ items }) =>
+    ).subscribe(({ items }) => {
       setOrders(
         items.map((order) => ({
           id: order.id,
@@ -43,8 +48,9 @@ export const Home = () => {
           status: order.status as OrderModel['status'],
           when: formatDateToWhenText(order.createdAt),
         })),
-      ),
-    )
+      )
+      setLoadingOrders(false)
+    })
 
     return () => subscribe.unsubscribe()
   }, [selectedStatus])
@@ -88,35 +94,45 @@ export const Home = () => {
           />
         </View>
 
-        <FlatList
-          data={orders}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Order data={item} onPress={handleOpenDetails(item.id)} />
-          )}
-          overScrollMode="never"
-          contentContainerStyle={{
-            paddingBottom: 100,
-          }}
-          ListEmptyComponent={() => (
-            <View className="flex-1 items-center justify-center">
-              <ChatTeardropText color={colors.gray[300]} size={sizes[8]} />
+        {loadingOrders && (
+          <View className="flex flex-1 justify-center items-center">
+            <Loading />
+          </View>
+        )}
 
-              <Text className="font-roboto  text-xl text-gray-300 mt-2 text-center">
-                Você ainda não possui {'\n'}
-                solicitações{' '}
-                {selectedStatus === 'open' ? 'em andamento' : 'finalizadas'}
-              </Text>
-            </View>
-          )}
-        />
+        {!loadingOrders && (
+          <FlatList
+            data={orders}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <Order data={item} onPress={handleOpenDetails(item.id)} />
+            )}
+            overScrollMode="never"
+            contentContainerStyle={{
+              paddingBottom: 100,
+            }}
+            ListEmptyComponent={() => (
+              <View className="flex-1 items-center justify-center">
+                <ChatTeardropText color={colors.gray[300]} size={sizes[8]} />
 
-        <ButtonFilled onPress={handleNewOrder}>
-          <Text className="font-roboto font-bold text-lg text-white">
-            Nova solicitação
-          </Text>
-        </ButtonFilled>
+                <Text className="font-roboto  text-xl text-gray-300 mt-2 text-center">
+                  Você ainda não possui {'\n'}
+                  solicitações{' '}
+                  {selectedStatus === 'open' ? 'em andamento' : 'finalizadas'}
+                </Text>
+              </View>
+            )}
+          />
+        )}
+
+        {!loadingOrders && (
+          <ButtonFilled onPress={handleNewOrder}>
+            <Text className="font-roboto font-bold text-lg text-white">
+              Nova solicitação
+            </Text>
+          </ButtonFilled>
+        )}
       </View>
     </View>
   )
