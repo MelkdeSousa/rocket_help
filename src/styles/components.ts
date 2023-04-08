@@ -21,6 +21,10 @@ export const KeyboardAvoidingView = styled(KeyboardAwareScrollView, {
   },
 })
 export const SafeAreaView = styled(RNSafeAreaView)
-export const ScrollView = styled(RNScrollView)
+export const ScrollView = styled(RNScrollView, {
+  props: {
+    contentContainerStyle: true,
+  },
+})
 export const Pressable = styled(RNPressable)
 export const FlatList = styled(RNFlatList)

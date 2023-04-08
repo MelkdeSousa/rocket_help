@@ -43,6 +43,7 @@ export const Input = styled(
               'bg-gray-700 text-base px-4 font-roboto font-medium text-white',
               {
                 'text-red-400': error,
+                [props.className]: !!props.className,
               },
             )}
             placeholderTextColor={error ? colors.red[400] : colors.gray[300]}

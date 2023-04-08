@@ -16,6 +16,8 @@ type EagerOrderSchema = {
   readonly description?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly solution?: string | null;
+  readonly closedAt?: string | null;
 }
 
 type LazyOrderSchema = {
@@ -28,6 +30,8 @@ type LazyOrderSchema = {
   readonly description?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly solution?: string | null;
+  readonly closedAt?: string | null;
 }
 
 export declare type OrderSchema = LazyLoading extends LazyLoadingDisabled ? EagerOrderSchema : LazyOrderSchema

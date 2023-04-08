@@ -44,6 +44,20 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "solution": {
+                    "name": "solution",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "closedAt": {
+                    "name": "closedAt",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -75,5 +89,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "697308d92c7589f447b2f6421c0a0249"
+    "version": "cf0215bff856de9bfd38c3a0095c976e"
 };
