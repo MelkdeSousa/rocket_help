@@ -4,8 +4,6 @@
 
 </div>
 
-## 🎨 Design
-
 ## 💬 Sobre
 
 RocketHelp é um aplicativo que permite que usuários registarem ocorrências relacionadas a patrimônios, como equipamentos, instalações e outros ativos. Com uma interface intuitiva e fácil de usar, o aplicativo ajuda a aumentar a eficiência e a transparência no registro de problemas e na manutenção preventiva dos ativos.
