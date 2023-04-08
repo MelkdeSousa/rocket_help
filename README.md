@@ -13,7 +13,7 @@ RocketHelp é um aplicativo que permite que usuários registarem ocorrências re
 ## 📱 Demo
 
 <div style="text-align:center">
-  <video src="docs/rocket_help_demo.webm" width="100%" height="56.25%" controls></video>
+  <video src="docs/rocket_help_demo.mp4" type="video/mp4" width="100%" height="56.25%" controls></video>
 </div>
 
 
