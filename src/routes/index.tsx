@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { useEffect } from 'react'
 import { Spinner } from '../components/Spinner'
-import { SignIn } from '../screens/SignIn'
 import useUserStore from '../stores/user.store'
 import { AppRoutes } from './app.routes'
+import { AuthRoutes } from './auth.routes'
 
 export const Routes = () => {
   const {
@@ -20,7 +20,7 @@ export const Routes = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <AppRoutes /> : <SignIn />}
+      {isAuthenticated ? <AppRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   )
 }

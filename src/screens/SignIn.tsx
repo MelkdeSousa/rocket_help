@@ -52,9 +52,10 @@ export const SignIn = () => {
 
   const onSubmit = async ({ password, email }: SignInInput) => {
     try {
-      const cognitoUser = await signIn(email, password)
+      const user = await signIn(email, password)
+      await signIn(email, password)
 
-      setUser(cognitoUser)
+      setUser(user)
 
       return
     } catch (error) {

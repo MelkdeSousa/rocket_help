@@ -43,7 +43,7 @@ export const Details = () => {
   const route = useRoute<AppRouteProp<'details'>>()
   const navigation = useNavigation<AppNavigationProp>()
 
-  const [order, setOrder] = useState<OrderModel>(null)
+  const [order, setOrder] = useState<OrderModel | null>(null)
   const [loading, setLoading] = useState(false)
 
   const {
@@ -58,6 +58,10 @@ export const Details = () => {
 
   const onSubmit = async (data: SolutionInput) => {
     const order = await DataStore.query(OrderSchema, orderId)
+
+    if (!order) {
+      return
+    }
 
     await DataStore.save(
       OrderSchema.copyOf(order, (item) => {
@@ -74,13 +78,18 @@ export const Details = () => {
   useEffect(() => {
     setLoading(true)
     DataStore.query(OrderSchema, orderId).then((data) => {
-      const closed = data.closedAt ? formatDateToWhenText(data.closedAt) : null
+      if (!data) {
+        return
+      }
+
+      const closed = data.closedAt ? formatDateToWhenText(data.closedAt) : ''
 
       setOrder({
-        ...data,
         status: data.status as OrderModel['status'],
         closed,
-        when: formatDateToWhenText(data!.createdAt),
+        when: formatDateToWhenText(data.createdAt!),
+        patrimony: data.patrimony || '',
+        id: data.id,
       })
       setLoading(false)
     })

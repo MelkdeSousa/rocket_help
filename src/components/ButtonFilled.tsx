@@ -13,6 +13,7 @@ export const ButtonFilled = ({
   loading = false,
   onPress,
   disabled = false,
+  className = '',
   ...props
 }: ButtonFilledProps) => {
   return (
@@ -20,6 +21,7 @@ export const ButtonFilled = ({
       className={clsx('w-full bg-product-700 items-center p-4 rounded-md', {
         'opacity-60 transition-opacity ease-in duration-200':
           loading || disabled,
+        [className]: !!className,
       })}
       onPress={loading || disabled ? undefined : onPress}
       {...props}
