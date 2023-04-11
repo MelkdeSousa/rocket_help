@@ -6,7 +6,7 @@
     "resourceNameTruncated": "rocketad1b1114",
     "userPoolName": "rockethelpad1b1114_userpool_ad1b1114",
     "autoVerifiedAttributes": [
-      "phone_number"
+      "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
@@ -64,4 +64,4 @@
     "authProviders": [],
     "hostedUI": false
   }
-}
+} 
